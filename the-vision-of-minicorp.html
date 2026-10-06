@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Vision of MiniCorp</title>
+<meta name="description" content="Autonomous companies are the last mile of AGI. Why today’s agent benchmarks cannot get us there, and what has to be built instead.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Schibsted+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%233F6E97'/><rect x='9' y='9' width='14' height='14' rx='3' fill='%23F3EEE8'/></svg>">
+</head>
+<body>
+
+<header class="nav">
+  <div class="shell nav-in">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>MiniCorp</a>
+    <nav class="nav-links">
+      <a href="index.html#industries">MiniCorp</a>
+      <a href="index.html#research">Research</a>
+      <a href="blog.html" aria-current="page">Blog</a>
+      <a href="about.html">Contact Us</a>
+    </nav>
+    <a class="btn btn-primary nav-cta" href="index.html#demo">Demo</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M3 7h18M3 12h18M3 17h18"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+<article class="article">
+  <div class="shell">
+
+    <a class="back" href="blog.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 12H5M11 18l-6-6 6-6"/>
+      </svg>
+      Blog
+    </a>
+
+    <div class="byline">
+      <span>5 min read</span>
+      <a class="faces" href="about.html" aria-label="Meet the team">
+        <img src="img/joy.webp" alt="Joy Zeng" width="560" height="560" loading="lazy">
+        <img src="img/zw.webp" alt="Zhenwei Dai" width="560" height="560" loading="lazy">
+      </a>
+    </div>
+    <h1>The Vision of MiniCorp</h1>
+
+    <figure class="a-hero">
+      <img src="img/city.webp" alt="An isometric city of miniature companies, each one a simulated firm"
+           width="1400" height="1097" loading="lazy">
+    </figure>
+
+    <div class="a-body">
+      <p>
+        From chatbot to long-running agent, the path to AGI has unfolded in stages.
+        The first was the chatbot: systems that can perform Q&amp;A. The second is
+        autonomous agents: systems that act, using tools, operating software, and
+        completing long-horizon tasks end to end. The third is autonomous companies,
+        where agents go beyond the tasks handed to them and run a business itself:
+        setting strategic direction, making decisions, coordinating work, and keeping
+        an organization alive and profitable over time. Autonomous companies are the
+        last mile of AGI.
+      </p>
+
+      <p>
+        Getting from the second stage to the third is a qualitative leap, not a matter
+        of scale. Today&rsquo;s leading benchmarks, such as
+        &tau;-bench [<a href="https://arxiv.org/abs/2406.12045" target="_blank" rel="noopener">Yao et al., 2024</a>],
+        SWE-bench [<a href="https://arxiv.org/abs/2310.06770" target="_blank" rel="noopener">Jimenez et al., 2024</a>],
+        GAIA [<a href="https://arxiv.org/abs/2311.12983" target="_blank" rel="noopener">Mialon et al., 2023</a>], and
+        OSWorld [<a href="https://arxiv.org/abs/2404.07972" target="_blank" rel="noopener">Xie et al., 2024</a>],
+        all measure agent capability on tasks that differ from running a company along
+        four axes:
+      </p>
+
+      <ul>
+        <li>
+          They have an oracle. SWE-bench has passing tests; &tau;-bench has a correct
+          final database state. Running a company is full of open-ended questions that
+          have no ground truth. Success is a distribution over outcomes, and the same
+          decision can be right in one market and ruinous in another.
+        </li>
+        <li>
+          Their horizon is minutes to hours, not months to years. The failures that
+          matter most in a company compound slowly and surface long after the decision
+          that caused them.
+        </li>
+        <li>
+          They are single-agent and single-role. There is no org structure, no division
+          of labor, no disagreement between two parties holding partial information and
+          different objectives. Coordination is not a harder version of execution; it is
+          a different problem.
+        </li>
+        <li>
+          They reset. Every episode starts clean. But accumulated consequence is what
+          makes a company a company. The customer lost in March is still lost in
+          November, and the shortcut taken last quarter is the incident you&rsquo;re
+          paged for now.
+        </li>
+      </ul>
+
+      <p>
+        To train LLMs as real digital workers capable of running autonomous companies,
+        models need real enterprise data and high-fidelity simulated workspaces to train
+        in, and both are among the hardest things to obtain. The most valuable enterprise
+        data is internal (employee conversations, email, company records) and carries
+        privacy obligations that rule out training. Hiring domain experts to annotate is
+        expensive, slow, and structurally biased toward short-horizon, well-specified
+        tasks. Records from bankrupt firms are genuine enterprise data, but they are
+        costly to acquire and demand substantial cleaning and mining before they can
+        serve as a benchmark or as training data.
+      </p>
+
+      <p>
+        The mission of MiniCorp is to remove this barrier to training autonomous agents,
+        and to move a real step closer to AGI. We are building synthetic companies:
+        platforms that continuously generate enterprise data, and simulated agentic
+        environments that interact with the external world rather than sitting in a
+        closed sandbox. Instead of waiting for real organizations to open their records,
+        we are building the organizations that can be opened: running, persistent, and
+        instrumented, so that agents can learn from them and be measured against them.
+        Agents that can run companies will have to be trained inside a company&rsquo;s
+        workspace. We&rsquo;re building the ones where that&rsquo;s possible.
+      </p>
+    </div>
+
+  </div>
+</article>
+</main>
+
+<footer class="foot">
+  <div class="shell foot-in">
+    <span>&copy; 2026 MiniCorp. All rights reserved.</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">Contact Us</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
