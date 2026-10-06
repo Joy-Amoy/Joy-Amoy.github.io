@@ -341,13 +341,49 @@ p{margin:0}
   font-size:clamp(17px,2vw,21px);color:var(--muted);
   letter-spacing:.01em;
 }
-.demo-still{
-  /* source is only 1022px wide, so cap the display size to keep it crisp */
-  margin:clamp(20px,2.8vw,32px) auto 0;max-width:510px;
-}
-.demo-still img{
-  display:block;width:100%;border-radius:12px;border:1px solid var(--line);
+.demo-stage{
+  position:relative;margin:clamp(20px,2.8vw,32px) auto 0;max-width:720px;
+  border-radius:12px;overflow:hidden;border:1px solid var(--line);
   box-shadow:0 1px 2px rgba(90,72,58,.05),0 18px 40px -24px rgba(90,72,58,.28);
+}
+.demo-bg{display:block;width:100%;height:auto}
+/* The WebGL canvas sits exactly on top of the backdrop it was calibrated to. */
+.demo-layer{position:absolute;inset:0;pointer-events:none}
+.demo-layer canvas{display:block;width:100%;height:100%}
+/* Status strip across the foot of the scene, as in the original artwork. */
+.demo-status{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  display:flex;align-items:center;gap:8px;
+  padding:7px clamp(10px,2vw,16px);
+  background:rgba(47,62,76,.88);
+  color:#eef3f7;font-size:clamp(10px,1.25vw,13.5px);line-height:1.4;
+  letter-spacing:.005em;
+}
+.demo-status b{font-weight:600}
+.demo-dot{
+  flex:none;width:7px;height:7px;border-radius:50%;background:#9fe3b4;
+  box-shadow:0 0 0 0 rgba(159,227,180,.6);
+  animation:demo-pulse 2.4s ease-out infinite;
+}
+.demo-sep{opacity:.55}
+@keyframes demo-pulse{
+  0%{box-shadow:0 0 0 0 rgba(159,227,180,.55)}
+  70%{box-shadow:0 0 0 7px rgba(159,227,180,0)}
+  100%{box-shadow:0 0 0 0 rgba(159,227,180,0)}
+}
+@media (prefers-reduced-motion:reduce){ .demo-dot{animation:none} }
+.demo-labels{position:absolute;inset:0;overflow:hidden}
+/* Job title floating above each agent's head. */
+.demo-label{
+  position:absolute;top:0;left:0;white-space:nowrap;
+  padding:2px 7px;border-radius:5px;
+  background:rgba(20,27,34,.72);
+  font-size:9.5px;line-height:1.45;font-weight:500;letter-spacing:.01em;
+  color:#f2f5f8;
+  text-shadow:0 1px 2px rgba(0,0,0,.4);
+}
+@media (max-width:620px){
+  .demo-label{font-size:8px;padding:1px 5px}
 }
 .cta-sub{margin-top:12px;font-size:13.5px;color:var(--faint)}
 

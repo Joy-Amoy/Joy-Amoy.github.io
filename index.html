@@ -161,10 +161,17 @@
 <section class="band" id="demo">
   <div class="shell">
     <h2 class="rv">See a demo</h2>
-    <p class="coming-soon rv" data-rv-delay="80">Live Demo Coming Soon</p>
-    <figure class="demo-still rv" data-rv-delay="140">
-      <img src="img/office-3d.webp" width="1022" height="612" loading="lazy"
+    <p class="coming-soon rv" data-rv-delay="80">A full interactive demo is coming soon!</p>
+    <figure class="demo-stage rv" data-rv-delay="140">
+      <img class="demo-bg" src="demo/office-bg.webp" width="1672" height="941" loading="lazy"
            alt="A simulated e-commerce office: ten named agents — Atlas, Nova, Pixel, Coco, Echo, Finn, Scout, Bolt, Stack and Sage — at their desks, with the warehouse, port and city around them">
+      <div class="demo-layer" id="demo-layer"></div>
+      <figcaption class="demo-status">
+        <span class="demo-dot" aria-hidden="true"></span>
+        <b>Office running</b>
+        <span class="demo-sep" aria-hidden="true">·</span>
+        <span>Agent Universe — E-commerce Company</span>
+      </figcaption>
     </figure>
     <div class="cta rv" data-rv-delay="160">
       <a class="btn btn-primary btn-lg btn-arrow" href="about.html">Meet the team<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
@@ -188,5 +195,33 @@
 </footer>
 
 <script src="main.js"></script>
+<script>
+// The 3D office runs on its own. The bundle is ~150 KB gzipped, so it is fetched
+// once the section is close to the viewport rather than on first paint.
+(function () {
+  var layer = document.getElementById('demo-layer');
+  var stage = layer && layer.closest('.demo-stage');
+  if (!layer || !stage) return;
+  var started = false;
+  function start() {
+    if (started) return;
+    started = true;
+    var s = document.createElement('script');
+    s.src = 'demo/minicorp-demo.js';
+    s.onload = function () {
+      if (window.mountOfficeDemo) {
+        window.mountOfficeDemo(layer);
+        layer.classList.add('is-live');
+      }
+    };
+    document.head.appendChild(s);
+  }
+  if (!('IntersectionObserver' in window)) { start(); return; }
+  var io = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) { io.disconnect(); start(); }
+  }, { rootMargin: '400px' });
+  io.observe(stage);
+})();
+</script>
 </body>
 </html>

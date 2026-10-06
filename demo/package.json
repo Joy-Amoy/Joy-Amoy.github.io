@@ -1,0 +1,13 @@
+{
+  "name": "minicorp-office-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Looping 3D office demo embedded on the MiniCorp home page.",
+  "scripts": {
+    "build": "esbuild src/embed.ts --bundle --format=iife --target=es2020 --minify --outfile=minicorp-demo.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.3",
+    "three": "^0.185.1"
+  }
+}
