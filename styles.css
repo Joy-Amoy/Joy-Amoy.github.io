@@ -200,7 +200,9 @@ p{margin:0}
 /* the stage already has dead space between the tagline and the lower two
    islands — parking the chips there costs no extra page height */
 .chips-stage{
-  position:absolute;left:50%;bottom:1.5%;transform:translateX(-50%);z-index:4;
+  /* span the stage and centre inside it — with left:50% the shrink-to-fit width
+     is capped at half the stage, which forces an early wrap */
+  position:absolute;left:0;right:0;bottom:1.5%;z-index:4;
 }
 .chip{
   display:inline-flex;align-items:center;gap:9px;
@@ -211,7 +213,7 @@ p{margin:0}
   transition:border-color .18s var(--ease),background .18s var(--ease),
              transform .18s var(--ease),box-shadow .18s var(--ease);
 }
-.chip svg{width:17px;height:17px;flex:none}
+.chip svg,.chip img{width:17px;height:17px;flex:none}
 .chip:hover{
   border-color:var(--accent-ink);background:#fff;
   transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(63,110,151,.5);
