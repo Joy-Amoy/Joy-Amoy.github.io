@@ -299,7 +299,45 @@ p{margin:0}
 
 
 /* ---------- research lineage ---------- */
-.lineage{margin-top:clamp(18px,2.4vw,30px)}
+.lineage{
+  margin-top:clamp(18px,2.4vw,30px);
+  display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);
+  gap:clamp(26px,4vw,56px);align-items:start;
+}
+/* explicit rows so the paper preview and the citation share row 2 and
+   therefore line up, whatever height the title wraps to */
+.lineage-head{grid-column:1 / -1;grid-row:1}   /* full width so the title keeps to one line */
+.lineage-art {grid-column:1;grid-row:2}
+.citation    {grid-column:2;grid-row:2}
+.lineage-head,.lineage-art,.citation{min-width:0}  /* grid items default to min-content */
+
+@media(max-width:900px){
+  .lineage{grid-template-columns:minmax(0,1fr)}
+  .lineage-head,.lineage-art,.citation{grid-column:1;grid-row:auto}
+}
+
+/* ---- citation ---- */
+.citation-head{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.citation-head p{font-size:15.5px;color:var(--muted)}
+.copy-btn{
+  flex:none;font:500 13.5px/1 var(--f-body);color:var(--ink);
+  background:var(--card);border:1px solid var(--line-strong);
+  border-radius:999px;padding:8px 16px;cursor:pointer;
+  transition:border-color .18s var(--ease),background .18s var(--ease),color .18s var(--ease);
+}
+.copy-btn:hover{border-color:var(--accent-ink);color:var(--accent-ink)}
+.copy-btn.is-done{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
+.citation-code{
+  margin:14px 0 0;padding:18px 20px;border-radius:10px;
+  background:var(--ink);color:#E7E3DC;
+  overflow-x:auto;                       /* long author list must not widen the page */
+  font:12.5px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  box-shadow:0 18px 40px -26px rgba(43,48,56,.55);
+}
+.citation-code code{white-space:pre}
+
 
 .lineage h3{
   font-size:clamp(19px,2.3vw,27px);letter-spacing:-.025em;line-height:1.22;
@@ -315,7 +353,7 @@ p{margin:0}
 
 /* paper preview, with a second sheet peeking out behind it */
 .lineage-art{
-  margin:clamp(22px,3vw,34px) 0 0;position:relative;max-width:390px;
+  margin:0;position:relative;max-width:390px;   /* row-gap already spaces it from the title */
 }
 .lineage-art::before{
   content:"";position:absolute;inset:0;

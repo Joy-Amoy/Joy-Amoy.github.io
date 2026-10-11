@@ -117,4 +117,30 @@
     vid.addEventListener('ended', stopVideo);     /* back to the poster so it can be replayed */
   }
 
+  /* --- copy-to-clipboard for the BibTeX block --- */
+  document.querySelectorAll('.copy-btn[data-copy]').forEach(function (btn) {
+    var src = document.querySelector(btn.dataset.copy);
+    if (!src) return;
+    btn.addEventListener('click', function () {
+      var text = src.textContent;
+      function done() {
+        btn.textContent = 'Copied';
+        btn.classList.add('is-done');
+        setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('is-done'); }, 1800);
+      }
+      function fallback() {
+        /* older browsers, and any page not served over https */
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:-1000px';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+    });
+  });
+
 })();
