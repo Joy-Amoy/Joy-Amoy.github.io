@@ -4,3 +4,6 @@ _mobileframe.html
 
 # demo build deps (the built bundle itself is committed)
 demo/node_modules/
+
+# local preview server config
+.claude/
